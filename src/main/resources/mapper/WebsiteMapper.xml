@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.WebsiteDao">
+	<resultMap id="BaseResultMap" type="com.swust.kelab.model.Website">
+		<id column="web_id" property="webId" jdbcType="INTEGER" />
+		<result column="web_name" property="webName" jdbcType="VARCHAR" />
+		<result column="web_url" property="webUrl" jdbcType="VARCHAR" />
+		<result column="web_user_id" property="webUserId" jdbcType="INTEGER" />
+		<result column="web_addtime" property="webAddtime" jdbcType="DATE" />
+		<result column="web_style_id" property="webStyleId" jdbcType="INTEGER" />
+		<result column="web_cate_id" property="webCateId" jdbcType="INTEGER" />
+		<result column="web_visitnum" property="webVisitnum" jdbcType="INTEGER" />
+		<result column="web_verified" property="webVerified" jdbcType="BIT" />
+		<result column="web_vertime" property="webVertime" jdbcType="TIMESTAMP" />
+		<result column="web_copyright" property="webCopyright"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		web_id, web_name, web_url, web_user_id, web_addtime,
+		web_style_id,
+		web_cate_id, web_visitnum,
+		web_verified,
+		web_vertime,web_copyright
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from website
+		where web_id = #{webId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		website
+		where web_id = #{webId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.swust.kelab.model.Website">
+		insert into website (web_id,
+		web_name, web_url,
+		web_user_id, web_addtime, web_style_id,
+		web_cate_id,
+		web_visitnum, web_verified,
+		web_vertime, web_copyright)
+		values
+		(#{webId,jdbcType=INTEGER}, #{webName,jdbcType=VARCHAR},
+		#{webUrl,jdbcType=VARCHAR},
+		#{webUserId,jdbcType=INTEGER},
+		#{webAddtime,jdbcType=DATE}, #{webStyleId,jdbcType=INTEGER},
+		#{webCateId,jdbcType=INTEGER}, #{webVisitnum,jdbcType=INTEGER},
+		#{webVerified,jdbcType=BIT},
+		#{webVertime,jdbcType=TIMESTAMP},
+		#{webCopyright,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.swust.kelab.model.Website">
+		insert into website
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="webId != null">
+				web_id,
+			</if>
+			<if test="webName != null">
+				web_name,
+			</if>
+			<if test="webUrl != null">
+				web_url,
+			</if>
+			<if test="webUserId != null">
+				web_user_id,
+			</if>
+			<if test="webAddtime != null">
+				web_addtime,
+			</if>
+			<if test="webStyleId != null">
+				web_style_id,
+			</if>
+			<if test="webCateId != null">
+				web_cate_id,
+			</if>
+			<if test="webVisitnum != null">
+				web_visitnum,
+			</if>
+			<if test="webVerified != null">
+				web_verified,
+			</if>
+			<if test="webVertime != null">
+				web_vertime,
+			</if>
+			<if test="webCopyright != null">
+				web_copyright,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="webId != null">
+				#{webId,jdbcType=INTEGER},
+			</if>
+			<if test="webName != null">
+				#{webName,jdbcType=VARCHAR},
+			</if>
+			<if test="webUrl != null">
+				#{webUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="webUserId != null">
+				#{webUserId,jdbcType=INTEGER},
+			</if>
+			<if test="webAddtime != null">
+				#{webAddtime,jdbcType=DATE},
+			</if>
+			<if test="webStyleId != null">
+				#{webStyleId,jdbcType=INTEGER},
+			</if>
+			<if test="webCateId != null">
+				#{webCateId,jdbcType=INTEGER},
+			</if>
+			<if test="webVisitnum != null">
+				#{webVisitnum,jdbcType=INTEGER},
+			</if>
+			<if test="webVerified != null">
+				#{webVerified,jdbcType=BIT},
+			</if>
+			<if test="webVertime != null">
+				#{webVertime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="webCopyright != null">
+				#{webCopyright,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.Website">
+		update website
+		<set>
+			<if test="webName != null">
+				web_name = #{webName,jdbcType=VARCHAR},
+			</if>
+			<if test="webUrl != null">
+				web_url = #{webUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="webUserId != null">
+				web_user_id = #{webUserId,jdbcType=INTEGER},
+			</if>
+			<if test="webAddtime != null">
+				web_addtime = #{webAddtime,jdbcType=DATE},
+			</if>
+			<if test="webStyleId != null">
+				web_style_id = #{webStyleId,jdbcType=INTEGER},
+			</if>
+			<if test="webCateId != null">
+				web_cate_id = #{webCateId,jdbcType=INTEGER},
+			</if>
+			<if test="webVisitnum != null">
+				web_visitnum = #{webVisitnum,jdbcType=INTEGER},
+			</if>
+			<if test="webVerified != null">
+				web_verified = #{webVerified,jdbcType=BIT},
+			</if>
+			<if test="webVertime != null">
+				web_vertime = #{webVertime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="webCopyright != null">
+				web_copyright = #{webCopyright,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where web_id = #{webId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.Website">
+		update website
+		set
+		web_name = #{webName,jdbcType=VARCHAR},
+		web_url =
+		#{webUrl,jdbcType=VARCHAR},
+		web_user_id =
+		#{webUserId,jdbcType=INTEGER},
+		web_addtime =
+		#{webAddtime,jdbcType=DATE},
+		web_style_id =
+		#{webStyleId,jdbcType=INTEGER},
+		web_cate_id =
+		#{webCateId,jdbcType=INTEGER},
+		web_visitnum =
+		#{webVisitnum,jdbcType=INTEGER},
+		web_verified =
+		#{webVerified,jdbcType=BIT},
+		web_vertime =
+		#{webVertime,jdbcType=TIMESTAMP}
+		web_copyright =
+		#{webCopyright,jdbcType=VARCHAR}
+		where web_id =
+		#{webId,jdbcType=INTEGER}
+	</update>
+
+	<!-- by liujie -->
+	<select id="selectByUrl" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from website
+		where web_url = #{webUrl,jdbcType=VARCHAR}
+	</select>
+
+	<!-- by liujie -->
+	<select id="selectAllByUserId" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from website
+		where web_user_id = #{userId,jdbcType=INTEGER}
+	</select>
+</mapper>

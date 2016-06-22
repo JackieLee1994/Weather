@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.PhotoDao">
+	<resultMap id="BaseResultMap" type="com.swust.kelab.model.Photo">
+		<id column="phot_id" property="photId" jdbcType="INTEGER" />
+		<result column="phot_navi_id" property="photNaviId" jdbcType="INTEGER" />
+		<result column="phot_title" property="photTitle" jdbcType="VARCHAR" />
+		<result column="phot_tags" property="photTags" jdbcType="VARCHAR" />
+		<result column="phot_time" property="photTime" jdbcType="TIMESTAMP" />
+		<result column="phot_publish" property="photPublish" jdbcType="VARCHAR" />
+		<result column="phot_istop" property="photIstop" jdbcType="INTEGER" />
+		<result column="phot_src" property="photSrc" jdbcType="VARCHAR" />
+		<result column="phot_des" property="photDes" jdbcType="VARCHAR" />
+		<result column="phot_hits" property="photHits" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.swust.kelab.model.Photo"
+		extends="BaseResultMap">
+		<result column="phot_content" property="photContent" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		phot_id, phot_navi_id, phot_title, phot_tags, phot_time, phot_publish,
+		phot_istop,
+		phot_src, phot_des, phot_hits
+	</sql>
+	<sql id="Blob_Column_List">
+		phot_content
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from photo
+		where phot_id = #{photId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from photo
+		where phot_id = #{photId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.swust.kelab.model.Photo">
+		insert into photo (phot_id, phot_navi_id, phot_title,
+		phot_tags, phot_time, phot_publish,
+		phot_istop, phot_src, phot_des,
+		phot_hits, phot_content)
+		values (#{photId,jdbcType=INTEGER}, #{photNaviId,jdbcType=INTEGER},
+		#{photTitle,jdbcType=VARCHAR},
+		#{photTags,jdbcType=VARCHAR}, #{photTime,jdbcType=TIMESTAMP}, #{photPublish,jdbcType=VARCHAR},
+		#{photIstop,jdbcType=INTEGER}, #{photSrc,jdbcType=VARCHAR},
+		#{photDes,jdbcType=VARCHAR},
+		#{photHits,jdbcType=INTEGER}, #{photContent,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.swust.kelab.model.Photo">
+		insert into photo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="photId != null">
+				phot_id,
+			</if>
+			<if test="photNaviId != null">
+				phot_navi_id,
+			</if>
+			<if test="photTitle != null">
+				phot_title,
+			</if>
+			<if test="photTags != null">
+				phot_tags,
+			</if>
+			<if test="photTime != null">
+				phot_time,
+			</if>
+			<if test="photPublish != null">
+				phot_publish,
+			</if>
+			<if test="photIstop != null">
+				phot_istop,
+			</if>
+			<if test="photSrc != null">
+				phot_src,
+			</if>
+			<if test="photDes != null">
+				phot_des,
+			</if>
+			<if test="photHits != null">
+				phot_hits,
+			</if>
+			<if test="photContent != null">
+				phot_content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="photId != null">
+				#{photId,jdbcType=INTEGER},
+			</if>
+			<if test="photNaviId != null">
+				#{photNaviId,jdbcType=INTEGER},
+			</if>
+			<if test="photTitle != null">
+				#{photTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="photTags != null">
+				#{photTags,jdbcType=VARCHAR},
+			</if>
+			<if test="photTime != null">
+				#{photTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="photPublish != null">
+				#{photPublish,jdbcType=VARCHAR},
+			</if>
+			<if test="photIstop != null">
+				#{photIstop,jdbcType=INTEGER},
+			</if>
+			<if test="photSrc != null">
+				#{photSrc,jdbcType=VARCHAR},
+			</if>
+			<if test="photDes != null">
+				#{photDes,jdbcType=VARCHAR},
+			</if>
+			<if test="photHits != null">
+				#{photHits,jdbcType=INTEGER},
+			</if>
+			<if test="photContent != null">
+				#{photContent,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.Photo">
+		update photo
+		<set>
+			<if test="photNaviId != null">
+				phot_navi_id = #{photNaviId,jdbcType=INTEGER},
+			</if>
+			<if test="photTitle != null">
+				phot_title = #{photTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="photTags != null">
+				phot_tags = #{photTags,jdbcType=VARCHAR},
+			</if>
+			<if test="photTime != null">
+				phot_time = #{photTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="photPublish != null">
+				phot_publish = #{photPublish,jdbcType=VARCHAR},
+			</if>
+			<if test="photIstop != null">
+				phot_istop = #{photIstop,jdbcType=INTEGER},
+			</if>
+			<if test="photSrc != null">
+				phot_src = #{photSrc,jdbcType=VARCHAR},
+			</if>
+			<if test="photDes != null">
+				phot_des = #{photDes,jdbcType=VARCHAR},
+			</if>
+			<if test="photHits != null">
+				phot_hits = #{photHits,jdbcType=INTEGER},
+			</if>
+			<if test="photContent != null">
+				phot_content = #{photContent,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where phot_id = #{photId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.swust.kelab.model.Photo">
+		update photo
+		set phot_navi_id = #{photNaviId,jdbcType=INTEGER},
+		phot_title = #{photTitle,jdbcType=VARCHAR},
+		phot_tags = #{photTags,jdbcType=VARCHAR},
+		phot_time = #{photTime,jdbcType=TIMESTAMP},
+		phot_publish = #{photPublish,jdbcType=VARCHAR},
+		phot_istop = #{photIstop,jdbcType=INTEGER},
+		phot_src = #{photSrc,jdbcType=VARCHAR},
+		phot_des = #{photDes,jdbcType=VARCHAR},
+		phot_hits = #{photHits,jdbcType=INTEGER},
+		phot_content = #{photContent,jdbcType=LONGVARCHAR}
+		where phot_id = #{photId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.Photo">
+		update photo
+		set phot_navi_id = #{photNaviId,jdbcType=INTEGER},
+		phot_title = #{photTitle,jdbcType=VARCHAR},
+		phot_tags = #{photTags,jdbcType=VARCHAR},
+		phot_time = #{photTime,jdbcType=TIMESTAMP},
+		phot_publish = #{photPublish,jdbcType=VARCHAR},
+		phot_istop = #{photIstop,jdbcType=INTEGER},
+		phot_src = #{photSrc,jdbcType=VARCHAR},
+		phot_des = #{photDes,jdbcType=VARCHAR},
+		phot_hits = #{photHits,jdbcType=INTEGER}
+		where phot_id = #{photId,jdbcType=INTEGER}
+	</update>
+
+	<!-- by liujie -->
+	<!-- 主要目的提供列表，因此不查询内容（content列），节省资源 -->
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from photo
+		<where>
+			<if test="naviId != null">
+				and phot_navi_id = #{naviId}
+			</if>
+		</where>
+		order by
+		phot_istop desc
+		<if test="ordCol != null ">
+			,${ordCol}
+			<if test="desc != null">
+				desc
+			</if>
+		</if>
+		<if test="size != null">
+			limit
+			<if test="begin != null">
+				#{begin,jdbcType=INTEGER},
+			</if>
+			#{size,jdbcType=INTEGER}
+		</if>
+	</select>
+	<!-- by liujie -->
+	<!-- 查询栏目下所有文章数目 -->
+	<select id="selectCountByNaviId" resultType="java.lang.Integer"
+		parameterType="java.lang.Integer">
+		SELECT COUNT(*) FROM photo WHERE
+		phot_navi_id=#{naviId,jdbcType=INTEGER}
+	</select>
+</mapper>

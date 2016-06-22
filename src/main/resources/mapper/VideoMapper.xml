@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.VideoDao">
+	<resultMap id="BaseResultMap" type="com.swust.kelab.model.Video">
+		<id column="video_id" property="videoId" jdbcType="INTEGER" />
+		<result column="video_navi_id" property="videoNaviId" jdbcType="INTEGER" />
+		<result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+		<result column="video_title" property="videoTitle" jdbcType="VARCHAR" />
+		<result column="video_hits" property="videoHits" jdbcType="INTEGER" />
+		<result column="video_time" property="videoTime" jdbcType="TIMESTAMP" />
+		<result column="video_istop" property="videoIstop" jdbcType="INTEGER" />
+		<result column="video_publish" property="videoPublish"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.swust.kelab.model.Video"
+		extends="BaseResultMap">
+		<result column="video_content" property="videoContent"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		video_id, video_navi_id, video_url, video_title, video_hits, video_time,
+		video_istop,
+		video_publish
+	</sql>
+	<sql id="Blob_Column_List">
+		video_content
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from video
+		where video_id = #{videoId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from video
+		where video_id = #{videoId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.swust.kelab.model.Video">
+		insert into video (video_id, video_navi_id, video_url,
+		video_title, video_hits, video_time,
+		video_istop, video_publish, video_content
+		)
+		values (#{videoId,jdbcType=INTEGER}, #{videoNaviId,jdbcType=INTEGER},
+		#{videoUrl,jdbcType=VARCHAR},
+		#{videoTitle,jdbcType=VARCHAR}, #{videoHits,jdbcType=INTEGER}, #{videoTime,jdbcType=TIMESTAMP},
+		#{videoIstop,jdbcType=INTEGER}, #{videoPublish,jdbcType=VARCHAR},
+		#{videoContent,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.swust.kelab.model.Video">
+		insert into video
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="videoId != null">
+				video_id,
+			</if>
+			<if test="videoNaviId != null">
+				video_navi_id,
+			</if>
+			<if test="videoUrl != null">
+				video_url,
+			</if>
+			<if test="videoTitle != null">
+				video_title,
+			</if>
+			<if test="videoHits != null">
+				video_hits,
+			</if>
+			<if test="videoTime != null">
+				video_time,
+			</if>
+			<if test="videoIstop != null">
+				video_istop,
+			</if>
+			<if test="videoPublish != null">
+				video_publish,
+			</if>
+			<if test="videoContent != null">
+				video_content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="videoId != null">
+				#{videoId,jdbcType=INTEGER},
+			</if>
+			<if test="videoNaviId != null">
+				#{videoNaviId,jdbcType=INTEGER},
+			</if>
+			<if test="videoUrl != null">
+				#{videoUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="videoTitle != null">
+				#{videoTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="videoHits != null">
+				#{videoHits,jdbcType=INTEGER},
+			</if>
+			<if test="videoTime != null">
+				#{videoTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="videoIstop != null">
+				#{videoIstop,jdbcType=INTEGER},
+			</if>
+			<if test="videoPublish != null">
+				#{videoPublish,jdbcType=VARCHAR},
+			</if>
+			<if test="videoContent != null">
+				#{videoContent,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.Video">
+		update video
+		<set>
+			<if test="videoNaviId != null">
+				video_navi_id = #{videoNaviId,jdbcType=INTEGER},
+			</if>
+			<if test="videoUrl != null">
+				video_url = #{videoUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="videoTitle != null">
+				video_title = #{videoTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="videoHits != null">
+				video_hits = #{videoHits,jdbcType=INTEGER},
+			</if>
+			<if test="videoTime != null">
+				video_time = #{videoTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="videoIstop != null">
+				video_istop = #{videoIstop,jdbcType=INTEGER},
+			</if>
+			<if test="videoPublish != null">
+				video_publish = #{videoPublish,jdbcType=VARCHAR},
+			</if>
+			<if test="videoContent != null">
+				video_content = #{videoContent,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where video_id = #{videoId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.swust.kelab.model.Video">
+		update video
+		set video_navi_id = #{videoNaviId,jdbcType=INTEGER},
+		video_url = #{videoUrl,jdbcType=VARCHAR},
+		video_title = #{videoTitle,jdbcType=VARCHAR},
+		video_hits = #{videoHits,jdbcType=INTEGER},
+		video_time = #{videoTime,jdbcType=TIMESTAMP},
+		video_istop = #{videoIstop,jdbcType=INTEGER},
+		video_publish = #{videoPublish,jdbcType=VARCHAR},
+		video_content = #{videoContent,jdbcType=LONGVARCHAR}
+		where video_id = #{videoId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.Video">
+		update video
+		set video_navi_id = #{videoNaviId,jdbcType=INTEGER},
+		video_url = #{videoUrl,jdbcType=VARCHAR},
+		video_title = #{videoTitle,jdbcType=VARCHAR},
+		video_hits = #{videoHits,jdbcType=INTEGER},
+		video_time = #{videoTime,jdbcType=TIMESTAMP},
+		video_istop = #{videoIstop,jdbcType=INTEGER},
+		video_publish = #{videoPublish,jdbcType=VARCHAR}
+		where video_id = #{videoId,jdbcType=INTEGER}
+	</update>
+	<!-- by liujie -->
+	<!-- 主要目的提供列表，因此不查询内容（content列），节省资源 -->
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from video
+		<where>
+			<if test="naviId != null">
+				and video_navi_id = #{naviId}
+			</if>
+		</where>
+		order by
+		video_istop desc
+		<if test="ordCol != null ">
+			,${ordCol}
+			<if test="desc != null">
+				desc
+			</if>
+		</if>
+		<if test="size != null">
+			limit
+			<if test="begin != null">
+				#{begin,jdbcType=INTEGER},
+			</if>
+			#{size,jdbcType=INTEGER}
+		</if>
+	</select>
+	<!-- by liujie -->
+	<!-- 查询栏目下所有文章数目 -->
+	<select id="selectCountByNaviId" resultType="java.lang.Integer"
+		parameterType="java.lang.Integer">
+		SELECT COUNT(*) FROM video WHERE
+		video_navi_id=#{naviId,jdbcType=INTEGER}
+	</select>
+</mapper>

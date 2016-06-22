@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.UserDao">
+	<resultMap id="BaseResultMap" type="com.swust.kelab.model.User">
+		<id column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="user_depa_id" property="userDepaId" jdbcType="INTEGER" />
+		<result column="user_loginname" property="userLoginname"
+			jdbcType="VARCHAR" />
+		<result column="user_pwd" property="userPwd" jdbcType="VARCHAR" />
+		<result column="user_realname" property="userRealname"
+			jdbcType="VARCHAR" />
+		<result column="user_gender" property="userGender" jdbcType="VARCHAR" />
+		<result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+		<result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+		<result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+		<result column="user_verified" property="userVerified"
+			jdbcType="INTEGER" />
+		<result column="user_remark" property="userRemark" jdbcType="VARCHAR" />
+		<result column="user_loginState" property="userLoginstate"
+			jdbcType="INTEGER" />
+		<result column="user_loginNum" property="userLoginnum"
+			jdbcType="INTEGER" />
+		<result column="user_regtime" property="userRegtime" jdbcType="TIMESTAMP" />
+		<result column="user_vertime" property="userVertime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		user_id, user_depa_id, user_loginname, user_pwd,
+		user_realname, user_gender,
+		user_email,
+		user_phone, user_address,
+		user_verified, user_remark, user_loginState,
+		user_loginNum,
+		user_regtime, user_vertime
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where user_id = #{userId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from user
+		where user_id = #{userId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.swust.kelab.model.User">
+		insert into user (user_id,
+		user_depa_id, user_loginname,
+		user_pwd, user_realname, user_gender,
+		user_email, user_phone, user_address,
+		user_verified, user_remark,
+		user_loginState,
+		user_loginNum, user_regtime, user_vertime
+		)
+		values
+		(#{userId,jdbcType=INTEGER}, #{userDepaId,jdbcType=INTEGER},
+		#{userLoginname,jdbcType=VARCHAR},
+		#{userPwd,jdbcType=VARCHAR},
+		#{userRealname,jdbcType=VARCHAR}, #{userGender,jdbcType=VARCHAR},
+		#{userEmail,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR},
+		#{userAddress,jdbcType=VARCHAR},
+		#{userVerified,jdbcType=INTEGER},
+		#{userRemark,jdbcType=VARCHAR}, #{userLoginstate,jdbcType=INTEGER},
+		#{userLoginnum,jdbcType=INTEGER}, #{userRegtime,jdbcType=TIMESTAMP},
+		#{userVertime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.swust.kelab.model.User">
+		insert into user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="userDepaId != null">
+				user_depa_id,
+			</if>
+			<if test="userLoginname != null">
+				user_loginname,
+			</if>
+			<if test="userPwd != null">
+				user_pwd,
+			</if>
+			<if test="userRealname != null">
+				user_realname,
+			</if>
+			<if test="userGender != null">
+				user_gender,
+			</if>
+			<if test="userEmail != null">
+				user_email,
+			</if>
+			<if test="userPhone != null">
+				user_phone,
+			</if>
+			<if test="userAddress != null">
+				user_address,
+			</if>
+			<if test="userVerified != null">
+				user_verified,
+			</if>
+			<if test="userRemark != null">
+				user_remark,
+			</if>
+			<if test="userLoginstate != null">
+				user_loginState,
+			</if>
+			<if test="userLoginnum != null">
+				user_loginNum,
+			</if>
+			<if test="userRegtime != null">
+				user_regtime,
+			</if>
+			<if test="userVertime != null">
+				user_vertime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="userDepaId != null">
+				#{userDepaId,jdbcType=INTEGER},
+			</if>
+			<if test="userLoginname != null">
+				#{userLoginname,jdbcType=VARCHAR},
+			</if>
+			<if test="userPwd != null">
+				#{userPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="userRealname != null">
+				#{userRealname,jdbcType=VARCHAR},
+			</if>
+			<if test="userGender != null">
+				#{userGender,jdbcType=VARCHAR},
+			</if>
+			<if test="userEmail != null">
+				#{userEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null">
+				#{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="userAddress != null">
+				#{userAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="userVerified != null">
+				#{userVerified,jdbcType=INTEGER},
+			</if>
+			<if test="userRemark != null">
+				#{userRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="userLoginstate != null">
+				#{userLoginstate,jdbcType=INTEGER},
+			</if>
+			<if test="userLoginnum != null">
+				#{userLoginnum,jdbcType=INTEGER},
+			</if>
+			<if test="userRegtime != null">
+				#{userRegtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userVertime != null">
+				#{userVertime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.User">
+		update user
+		<set>
+			<if test="userDepaId != null">
+				user_depa_id = #{userDepaId,jdbcType=INTEGER},
+			</if>
+			<if test="userLoginname != null">
+				user_loginname = #{userLoginname,jdbcType=VARCHAR},
+			</if>
+			<if test="userPwd != null">
+				user_pwd = #{userPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="userRealname != null">
+				user_realname = #{userRealname,jdbcType=VARCHAR},
+			</if>
+			<if test="userGender != null">
+				user_gender = #{userGender,jdbcType=VARCHAR},
+			</if>
+			<if test="userEmail != null">
+				user_email = #{userEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null">
+				user_phone = #{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="userAddress != null">
+				user_address = #{userAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="userVerified != null">
+				user_verified = #{userVerified,jdbcType=INTEGER},
+			</if>
+			<if test="userRemark != null">
+				user_remark = #{userRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="userLoginstate != null">
+				user_loginState = #{userLoginstate,jdbcType=INTEGER},
+			</if>
+			<if test="userLoginnum != null">
+				user_loginNum = #{userLoginnum,jdbcType=INTEGER},
+			</if>
+			<if test="userRegtime != null">
+				user_regtime = #{userRegtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userVertime != null">
+				user_vertime = #{userVertime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where user_id = #{userId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.User">
+		update user
+		set
+		user_depa_id = #{userDepaId,jdbcType=INTEGER},
+		user_loginname =
+		#{userLoginname,jdbcType=VARCHAR},
+		user_pwd =
+		#{userPwd,jdbcType=VARCHAR},
+		user_realname =
+		#{userRealname,jdbcType=VARCHAR},
+		user_gender =
+		#{userGender,jdbcType=VARCHAR},
+		user_email =
+		#{userEmail,jdbcType=VARCHAR},
+		user_phone =
+		#{userPhone,jdbcType=VARCHAR},
+		user_address =
+		#{userAddress,jdbcType=VARCHAR},
+		user_verified =
+		#{userVerified,jdbcType=INTEGER},
+		user_remark =
+		#{userRemark,jdbcType=VARCHAR},
+		user_loginState =
+		#{userLoginstate,jdbcType=INTEGER},
+		user_loginNum =
+		#{userLoginnum,jdbcType=INTEGER},
+		user_regtime =
+		#{userRegtime,jdbcType=TIMESTAMP},
+		user_vertime =
+		#{userVertime,jdbcType=TIMESTAMP}
+		where user_id =
+		#{userId,jdbcType=INTEGER}
+	</update>
+
+	<!-- by liujie -->
+	<select id="selectByLoginname" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where user_loginname = #{loginname}
+	</select>
+
+	<!-- 更改登陆状态，by liujie -->
+	<update id="updateState" parameterType="Map">
+		UPDATE
+		user
+		SET
+		user_loginState = #{state}
+		WHERE
+		user_id = #{id}
+	</update>
+
+	<!-- by liujie -->
+	<select id="selectByEmail" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where user_email = #{email}
+	</select>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.PptphotoDao" >
+  <resultMap id="BaseResultMap" type="com.swust.kelab.model.Pptphoto" >
+    <id column="ppt_id" property="pptId" jdbcType="INTEGER" />
+    <result column="ppt_web_id" property="pptWebId" jdbcType="INTEGER" />
+    <result column="ppt_title" property="pptTitle" jdbcType="VARCHAR" />
+    <result column="ppt_url" property="pptUrl" jdbcType="VARCHAR" />
+    <result column="ppt_src" property="pptSrc" jdbcType="VARCHAR" />
+    <result column="ppt_size" property="pptSize" jdbcType="INTEGER" />
+    <result column="ppt_order" property="pptOrder" jdbcType="INTEGER" />
+    <result column="ppt_time" property="pptTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ppt_id, ppt_web_id, ppt_title, ppt_url, ppt_src, ppt_size, ppt_order, ppt_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pptphoto
+    where ppt_id = #{pptId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pptphoto
+    where ppt_id = #{pptId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.swust.kelab.model.Pptphoto" >
+    insert into pptphoto (ppt_id, ppt_web_id, ppt_title, 
+      ppt_url, ppt_src, ppt_size, 
+      ppt_order, ppt_time)
+    values (#{pptId,jdbcType=INTEGER}, #{pptWebId,jdbcType=INTEGER}, #{pptTitle,jdbcType=VARCHAR}, 
+      #{pptUrl,jdbcType=VARCHAR}, #{pptSrc,jdbcType=VARCHAR}, #{pptSize,jdbcType=INTEGER}, 
+      #{pptOrder,jdbcType=INTEGER}, #{pptTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.swust.kelab.model.Pptphoto" >
+    insert into pptphoto
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pptId != null" >
+        ppt_id,
+      </if>
+      <if test="pptWebId != null" >
+        ppt_web_id,
+      </if>
+      <if test="pptTitle != null" >
+        ppt_title,
+      </if>
+      <if test="pptUrl != null" >
+        ppt_url,
+      </if>
+      <if test="pptSrc != null" >
+        ppt_src,
+      </if>
+      <if test="pptSize != null" >
+        ppt_size,
+      </if>
+      <if test="pptOrder != null" >
+        ppt_order,
+      </if>
+      <if test="pptTime != null" >
+        ppt_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pptId != null" >
+        #{pptId,jdbcType=INTEGER},
+      </if>
+      <if test="pptWebId != null" >
+        #{pptWebId,jdbcType=INTEGER},
+      </if>
+      <if test="pptTitle != null" >
+        #{pptTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="pptUrl != null" >
+        #{pptUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pptSrc != null" >
+        #{pptSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="pptSize != null" >
+        #{pptSize,jdbcType=INTEGER},
+      </if>
+      <if test="pptOrder != null" >
+        #{pptOrder,jdbcType=INTEGER},
+      </if>
+      <if test="pptTime != null" >
+        #{pptTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.Pptphoto" >
+    update pptphoto
+    <set >
+      <if test="pptWebId != null" >
+        ppt_web_id = #{pptWebId,jdbcType=INTEGER},
+      </if>
+      <if test="pptTitle != null" >
+        ppt_title = #{pptTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="pptUrl != null" >
+        ppt_url = #{pptUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pptSrc != null" >
+        ppt_src = #{pptSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="pptSize != null" >
+        ppt_size = #{pptSize,jdbcType=INTEGER},
+      </if>
+      <if test="pptOrder != null" >
+        ppt_order = #{pptOrder,jdbcType=INTEGER},
+      </if>
+      <if test="pptTime != null" >
+        ppt_time = #{pptTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ppt_id = #{pptId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.Pptphoto" >
+    update pptphoto
+    set ppt_web_id = #{pptWebId,jdbcType=INTEGER},
+      ppt_title = #{pptTitle,jdbcType=VARCHAR},
+      ppt_url = #{pptUrl,jdbcType=VARCHAR},
+      ppt_src = #{pptSrc,jdbcType=VARCHAR},
+      ppt_size = #{pptSize,jdbcType=INTEGER},
+      ppt_order = #{pptOrder,jdbcType=INTEGER},
+      ppt_time = #{pptTime,jdbcType=TIMESTAMP}
+    where ppt_id = #{pptId,jdbcType=INTEGER}
+  </update>
+</mapper>

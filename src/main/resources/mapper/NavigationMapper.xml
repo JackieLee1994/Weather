@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.NavigationDao">
+	<resultMap id="BaseResultMap" type="com.swust.kelab.model.Navigation">
+		<id column="navi_id" property="naviId" jdbcType="INTEGER" />
+		<result column="navi_parentid" property="naviParentid"
+			jdbcType="INTEGER" />
+		<result column="navi_web_id" property="naviWebId" jdbcType="INTEGER" />
+		<result column="navi_name" property="naviName" jdbcType="VARCHAR" />
+		<result column="navi_name_en" property="naviNameEn" jdbcType="VARCHAR" />
+		<result column="navi_type" property="naviType" jdbcType="INTEGER" />
+		<result column="navi_order" property="naviOrder" jdbcType="INTEGER" />
+		<result column="navi_url" property="naviUrl" jdbcType="VARCHAR" />
+		<result column="navi_ishidden" property="naviIshidden"
+			jdbcType="INTEGER" />
+		<result column="navi_isindex" property="naviIsindex" jdbcType="INTEGER" />
+		<result column="navi_isout" property="naviIsout" jdbcType="INTEGER" />
+		<result column="navi_ismobile" property="naviIsmobile"
+			jdbcType="INTEGER" />
+		<result column="navi_pic" property="naviPic" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		navi_id, navi_parentid, navi_web_id, navi_name,
+		navi_name_en, navi_type,
+		navi_order,
+		navi_url,
+		navi_ishidden,navi_isindex,
+		navi_isout, navi_ismobile, navi_pic
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from navigation
+		where navi_id = #{naviId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		navigation
+		where navi_id = #{naviId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.swust.kelab.model.Navigation">
+		insert into navigation
+		(navi_id, navi_parentid, navi_web_id,
+		navi_name, navi_name_en,
+		navi_type,
+		navi_order, navi_url, navi_ishidden,navi_isindex,
+		navi_isout,
+		navi_ismobile, navi_pic
+		)
+		values (#{naviId,jdbcType=INTEGER},
+		#{naviParentid,jdbcType=INTEGER},
+		#{naviWebId,jdbcType=INTEGER},
+		#{naviName,jdbcType=VARCHAR}, #{naviNameEn,jdbcType=VARCHAR},
+		#{naviType,jdbcType=INTEGER},
+		#{naviOrder,jdbcType=INTEGER},
+		#{naviUrl,jdbcType=VARCHAR},
+		#{naviIshidden,jdbcType=INTEGER},
+		#{naviIsindex,jdbcType=INTEGER},
+		#{naviIsout,jdbcType=INTEGER},
+		#{naviIsmobile,jdbcType=INTEGER},
+		#{naviPic,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.swust.kelab.model.Navigation">
+		insert into navigation
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="naviId != null">
+				navi_id,
+			</if>
+			<if test="naviParentid != null">
+				navi_parentid,
+			</if>
+			<if test="naviWebId != null">
+				navi_web_id,
+			</if>
+			<if test="naviName != null">
+				navi_name,
+			</if>
+			<if test="naviNameEn != null">
+				navi_name_en,
+			</if>
+			<if test="naviType != null">
+				navi_type,
+			</if>
+			<if test="naviOrder != null">
+				navi_order,
+			</if>
+			<if test="naviUrl != null">
+				navi_url,
+			</if>
+			<if test="naviIshidden != null">
+				navi_ishidden,
+			</if>
+			<if test="naviIsindex != null">
+				navi_isindex,
+			</if>
+			<if test="naviIsout != null">
+				navi_isout,
+			</if>
+			<if test="naviIsmobile != null">
+				navi_ismobile,
+			</if>
+			<if test="naviPic != null">
+				navi_pic,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="naviId != null">
+				#{naviId,jdbcType=INTEGER},
+			</if>
+			<if test="naviParentid != null">
+				#{naviParentid,jdbcType=INTEGER},
+			</if>
+			<if test="naviWebId != null">
+				#{naviWebId,jdbcType=INTEGER},
+			</if>
+			<if test="naviName != null">
+				#{naviName,jdbcType=VARCHAR},
+			</if>
+			<if test="naviNameEn != null">
+				#{naviNameEn,jdbcType=VARCHAR},
+			</if>
+			<if test="naviType != null">
+				#{naviType,jdbcType=INTEGER},
+			</if>
+			<if test="naviOrder != null">
+				#{naviOrder,jdbcType=INTEGER},
+			</if>
+			<if test="naviUrl != null">
+				#{naviUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="naviIshidden != null">
+				#{naviIshidden,jdbcType=INTEGER},
+			</if>
+			<if test="naviIsindex != null">
+				#{naviIsindex,jdbcType=INTEGER},
+			</if>
+			<if test="naviIsout != null">
+				#{naviIsout,jdbcType=INTEGER},
+			</if>
+			<if test="naviIsmobile != null">
+				#{naviIsmobile,jdbcType=INTEGER},
+			</if>
+			<if test="naviPic != null">
+				#{naviPic,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.Navigation">
+		update navigation
+		<set>
+			<if test="naviParentid != null">
+				navi_parentid = #{naviParentid,jdbcType=INTEGER},
+			</if>
+			<if test="naviWebId != null">
+				navi_web_id = #{naviWebId,jdbcType=INTEGER},
+			</if>
+			<if test="naviName != null">
+				navi_name = #{naviName,jdbcType=VARCHAR},
+			</if>
+			<if test="naviNameEn != null">
+				navi_name_en = #{naviNameEn,jdbcType=VARCHAR},
+			</if>
+			<if test="naviType != null">
+				navi_type = #{naviType,jdbcType=INTEGER},
+			</if>
+			<if test="naviOrder != null">
+				navi_order = #{naviOrder,jdbcType=INTEGER},
+			</if>
+			<if test="naviUrl != null">
+				navi_url = #{naviUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="naviIshidden != null">
+				navi_ishidden = #{naviIshidden,jdbcType=INTEGER},
+			</if>
+			<if test="naviIsindex != null">
+				navi_isindex = #{naviIsindex,jdbcType=INTEGER},
+			</if>
+			<if test="naviIsout != null">
+				navi_isout = #{naviIsout,jdbcType=INTEGER},
+			</if>
+			<if test="naviIsmobile != null">
+				navi_ismobile = #{naviIsmobile,jdbcType=INTEGER},
+			</if>
+			<if test="naviPic != null">
+				navi_pic = #{naviPic,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where navi_id = #{naviId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.Navigation">
+		update navigation
+		set navi_parentid = #{naviParentid,jdbcType=INTEGER},
+		navi_web_id =
+		#{naviWebId,jdbcType=INTEGER},
+		navi_name =
+		#{naviName,jdbcType=VARCHAR},
+		navi_name_en =
+		#{naviNameEn,jdbcType=VARCHAR},
+		navi_type =
+		#{naviType,jdbcType=INTEGER},
+		navi_order =
+		#{naviOrder,jdbcType=INTEGER},
+		navi_url = #{naviUrl,jdbcType=VARCHAR},
+		navi_ishidden = #{naviIshidden,jdbcType=INTEGER},
+		navi_isindex =
+		#{naviIsindex,jdbcType=INTEGER},
+		navi_isout =
+		#{naviIsout,jdbcType=INTEGER},
+		navi_ismobile =
+		#{naviIsmobile,jdbcType=INTEGER},
+		navi_pic =
+		#{naviPic,jdbcType=VARCHAR}
+		where navi_id = #{naviId,jdbcType=INTEGER}
+	</update>
+
+	<!-- by liujie -->
+	<select id="selectTop" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from navigation
+		where navi_web_id = #{webId,jdbcType=INTEGER}
+		and
+		navi_parentid=0
+		ORDER BY navi_order
+	</select>
+
+	<!-- by liujie -->
+	<select id="selectByParentid" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from navigation
+		where navi_parentid = #{parentid,jdbcType=INTEGER}
+		ORDER BY navi_order
+	</select>
+
+	<!-- by liujie -->
+	<select id="selectIndexByWebId" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from navigation
+		where navi_isindex > 0
+		and navi_web_id =
+		#{webId,jdbcType=INTEGER} ORDER BY navi_isindex
+	</select>
+
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.ModuleActionDao" >
+  <resultMap id="BaseResultMap" type="com.swust.kelab.model.ModuleAction" >
+    <id column="moac_id" property="moacId" jdbcType="INTEGER" />
+    <result column="moac_mo_id" property="moacMoId" jdbcType="INTEGER" />
+    <result column="moac_ac_id" property="moacAcId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    moac_id, moac_mo_id, moac_ac_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from moduleaction
+    where moac_id = #{moacId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from moduleaction
+    where moac_id = #{moacId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.swust.kelab.model.ModuleAction" >
+    insert into moduleaction (moac_id, moac_mo_id, moac_ac_id
+      )
+    values (#{moacId,jdbcType=INTEGER}, #{moacMoId,jdbcType=INTEGER}, #{moacAcId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.swust.kelab.model.ModuleAction" >
+    insert into moduleaction
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="moacId != null" >
+        moac_id,
+      </if>
+      <if test="moacMoId != null" >
+        moac_mo_id,
+      </if>
+      <if test="moacAcId != null" >
+        moac_ac_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="moacId != null" >
+        #{moacId,jdbcType=INTEGER},
+      </if>
+      <if test="moacMoId != null" >
+        #{moacMoId,jdbcType=INTEGER},
+      </if>
+      <if test="moacAcId != null" >
+        #{moacAcId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.ModuleAction" >
+    update moduleaction
+    <set >
+      <if test="moacMoId != null" >
+        moac_mo_id = #{moacMoId,jdbcType=INTEGER},
+      </if>
+      <if test="moacAcId != null" >
+        moac_ac_id = #{moacAcId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where moac_id = #{moacId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.ModuleAction" >
+    update moduleaction
+    set moac_mo_id = #{moacMoId,jdbcType=INTEGER},
+      moac_ac_id = #{moacAcId,jdbcType=INTEGER}
+    where moac_id = #{moacId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.DownloadDao">
+	<resultMap id="BaseResultMap" type="com.swust.kelab.model.Download">
+		<id column="down_id" property="downId" jdbcType="INTEGER" />
+		<result column="down_navi_id" property="downNaviId" jdbcType="INTEGER" />
+		<result column="down_time" property="downTime" jdbcType="TIMESTAMP" />
+		<result column="down_title" property="downTitle" jdbcType="VARCHAR" />
+		<result column="down_tags" property="downTags" jdbcType="VARCHAR" />
+		<result column="down_size" property="downSize" jdbcType="INTEGER" />
+		<result column="down_filename" property="downFilename"
+			jdbcType="VARCHAR" />
+		<result column="down_filetype" property="downFiletype"
+			jdbcType="VARCHAR" />
+		<result column="down_pic" property="downPic" jdbcType="VARCHAR" />
+		<result column="down_hits" property="downHits" jdbcType="INTEGER" />
+		<result column="down_istop" property="downIstop" jdbcType="INTEGER" />
+		<result column="down_publish" property="downPublish" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.swust.kelab.model.Download"
+		extends="BaseResultMap">
+		<result column="down_describe" property="downDescribe"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		down_id, down_navi_id, down_time, down_title, down_tags,
+		down_size,
+		down_filename,
+		down_filetype, down_pic, down_hits,
+		down_istop, down_publish
+	</sql>
+	<sql id="Blob_Column_List">
+		down_describe
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from download
+		where down_id = #{downId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		download
+		where down_id = #{downId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.swust.kelab.model.Download">
+		insert into download (down_id,
+		down_navi_id, down_time,
+		down_title, down_tags, down_size,
+		down_filename, down_filetype, down_pic,
+		down_hits, down_istop,
+		down_publish,
+		down_describe)
+		values (#{downId,jdbcType=INTEGER},
+		#{downNaviId,jdbcType=INTEGER},
+		#{downTime,jdbcType=TIMESTAMP},
+		#{downTitle,jdbcType=VARCHAR}, #{downTags,jdbcType=VARCHAR},
+		#{downSize,jdbcType=INTEGER},
+		#{downFilename,jdbcType=VARCHAR},
+		#{downFiletype,jdbcType=VARCHAR},
+		#{downPic,jdbcType=VARCHAR},
+		#{downHits,jdbcType=INTEGER}, #{downIstop,jdbcType=INTEGER},
+		#{downPublish,jdbcType=VARCHAR},
+		#{downDescribe,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.swust.kelab.model.Download">
+		insert into download
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="downId != null">
+				down_id,
+			</if>
+			<if test="downNaviId != null">
+				down_navi_id,
+			</if>
+			<if test="downTime != null">
+				down_time,
+			</if>
+			<if test="downTitle != null">
+				down_title,
+			</if>
+			<if test="downTags != null">
+				down_tags,
+			</if>
+			<if test="downSize != null">
+				down_size,
+			</if>
+			<if test="downFilename != null">
+				down_filename,
+			</if>
+			<if test="downFiletype != null">
+				down_filetype,
+			</if>
+			<if test="downPic != null">
+				down_pic,
+			</if>
+			<if test="downHits != null">
+				down_hits,
+			</if>
+			<if test="downIstop != null">
+				down_istop,
+			</if>
+			<if test="downPublish != null">
+				down_publish,
+			</if>
+			<if test="downDescribe != null">
+				down_describe,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="downId != null">
+				#{downId,jdbcType=INTEGER},
+			</if>
+			<if test="downNaviId != null">
+				#{downNaviId,jdbcType=INTEGER},
+			</if>
+			<if test="downTime != null">
+				#{downTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="downTitle != null">
+				#{downTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="downTags != null">
+				#{downTags,jdbcType=VARCHAR},
+			</if>
+			<if test="downSize != null">
+				#{downSize,jdbcType=INTEGER},
+			</if>
+			<if test="downFilename != null">
+				#{downFilename,jdbcType=VARCHAR},
+			</if>
+			<if test="downFiletype != null">
+				#{downFiletype,jdbcType=VARCHAR},
+			</if>
+			<if test="downPic != null">
+				#{downPic,jdbcType=VARCHAR},
+			</if>
+			<if test="downHits != null">
+				#{downHits,jdbcType=INTEGER},
+			</if>
+			<if test="downIstop != null">
+				#{downIstop,jdbcType=INTEGER},
+			</if>
+			<if test="downPublish != null">
+				#{downPublish,jdbcType=VARCHAR},
+			</if>
+			<if test="downDescribe != null">
+				#{downDescribe,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.Download">
+		update download
+		<set>
+			<if test="downNaviId != null">
+				down_navi_id = #{downNaviId,jdbcType=INTEGER},
+			</if>
+			<if test="downTime != null">
+				down_time = #{downTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="downTitle != null">
+				down_title = #{downTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="downTags != null">
+				down_tags = #{downTags,jdbcType=VARCHAR},
+			</if>
+			<if test="downSize != null">
+				down_size = #{downSize,jdbcType=INTEGER},
+			</if>
+			<if test="downFilename != null">
+				down_filename = #{downFilename,jdbcType=VARCHAR},
+			</if>
+			<if test="downFiletype != null">
+				down_filetype = #{downFiletype,jdbcType=VARCHAR},
+			</if>
+			<if test="downPic != null">
+				down_pic = #{downPic,jdbcType=VARCHAR},
+			</if>
+			<if test="downHits != null">
+				down_hits = #{downHits,jdbcType=INTEGER},
+			</if>
+			<if test="downIstop != null">
+				down_istop = #{downIstop,jdbcType=INTEGER},
+			</if>
+			<if test="downPublish != null">
+				down_publish = #{downPublish,jdbcType=VARCHAR},
+			</if>
+			<if test="downDescribe != null">
+				down_describe = #{downDescribe,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where down_id = #{downId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.swust.kelab.model.Download">
+		update
+		download
+		set down_navi_id = #{downNaviId,jdbcType=INTEGER},
+		down_time =
+		#{downTime,jdbcType=TIMESTAMP},
+		down_title =
+		#{downTitle,jdbcType=VARCHAR},
+		down_tags =
+		#{downTags,jdbcType=VARCHAR},
+		down_size = #{downSize,jdbcType=INTEGER},
+		down_filename = #{downFilename,jdbcType=VARCHAR},
+		down_filetype =
+		#{downFiletype,jdbcType=VARCHAR},
+		down_pic =
+		#{downPic,jdbcType=VARCHAR},
+		down_hits = #{downHits,jdbcType=INTEGER},
+		down_istop = #{downIstop,jdbcType=INTEGER},
+		down_publish =
+		#{downPublish,jdbcType=VARCHAR},
+		down_describe =
+		#{downDescribe,jdbcType=LONGVARCHAR}
+		where down_id =
+		#{downId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.Download">
+		update download
+		set down_navi_id = #{downNaviId,jdbcType=INTEGER},
+		down_time =
+		#{downTime,jdbcType=TIMESTAMP},
+		down_title =
+		#{downTitle,jdbcType=VARCHAR},
+		down_tags =
+		#{downTags,jdbcType=VARCHAR},
+		down_size = #{downSize,jdbcType=INTEGER},
+		down_filename = #{downFilename,jdbcType=VARCHAR},
+		down_filetype =
+		#{downFiletype,jdbcType=VARCHAR},
+		down_pic =
+		#{downPic,jdbcType=VARCHAR},
+		down_hits = #{downHits,jdbcType=INTEGER},
+		down_istop = #{downIstop,jdbcType=INTEGER},
+		down_publish =
+		#{downPublish,jdbcType=VARCHAR}
+		where down_id =
+		#{downId,jdbcType=INTEGER}
+	</update>
+	<!-- by liujie -->
+	<!-- 主要目的提供列表，因此不查询内容（content列），节省资源 -->
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from download
+		<where>
+			<if test="naviId != null">
+				and down_navi_id = #{naviId}
+			</if>
+		</where>
+		order by
+		down_istop desc
+		<if test="ordCol != null ">
+			,${ordCol}
+			<if test="desc != null">
+				desc
+			</if>
+		</if>
+		<if test="size != null">
+			limit
+			<if test="begin != null">
+				#{begin,jdbcType=INTEGER},
+			</if>
+			#{size,jdbcType=INTEGER}
+		</if>
+	</select>
+	<!-- by liujie -->
+	<!-- 查询栏目下所有文章数目 -->
+	<select id="selectCountByNaviId" resultType="java.lang.Integer"
+		parameterType="java.lang.Integer">
+		SELECT COUNT(*) FROM download WHERE
+		down_navi_id=#{naviId,jdbcType=INTEGER}
+	</select>
+</mapper>

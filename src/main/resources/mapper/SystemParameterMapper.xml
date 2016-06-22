@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.SystemParameterDao">
+	<resultMap id="BaseResultMap" type="com.swust.kelab.model.SystemParameter">
+		<id column="sypa_id" property="sypaId" jdbcType="INTEGER" />
+		<result column="sypa_name" property="sypaName" jdbcType="VARCHAR" />
+		<result column="sypa_nameEn" property="sypaNameen" jdbcType="VARCHAR" />
+		<result column="sypa_value" property="sypaValue" jdbcType="VARCHAR" />
+		<result column="sypa_type" property="sypaType" jdbcType="INTEGER" />
+		<result column="sypa_remark" property="sypaRemark" jdbcType="VARCHAR" />
+		<result column="sypa_order" property="sypaOrder" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		sypa_id, sypa_name, sypa_nameEn, sypa_value, sypa_type,
+		sypa_remark,
+		sypa_order
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from systemparameter
+		where sypa_id = #{sypaId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		systemparameter
+		where sypa_id = #{sypaId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.swust.kelab.model.SystemParameter">
+		insert into systemparameter
+		(sypa_id, sypa_name, sypa_nameEn,
+		sypa_value, sypa_type, sypa_remark,
+		sypa_order)
+		values (#{sypaId,jdbcType=INTEGER},
+		#{sypaName,jdbcType=VARCHAR},
+		#{sypaNameen,jdbcType=VARCHAR},
+		#{sypaValue,jdbcType=VARCHAR}, #{sypaType,jdbcType=INTEGER},
+		#{sypaRemark,jdbcType=VARCHAR},
+		#{sypaOrder,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.swust.kelab.model.SystemParameter">
+		insert into systemparameter
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sypaId != null">
+				sypa_id,
+			</if>
+			<if test="sypaName != null">
+				sypa_name,
+			</if>
+			<if test="sypaNameen != null">
+				sypa_nameEn,
+			</if>
+			<if test="sypaValue != null">
+				sypa_value,
+			</if>
+			<if test="sypaType != null">
+				sypa_type,
+			</if>
+			<if test="sypaRemark != null">
+				sypa_remark,
+			</if>
+			<if test="sypaOrder != null">
+				sypa_order,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sypaId != null">
+				#{sypaId,jdbcType=INTEGER},
+			</if>
+			<if test="sypaName != null">
+				#{sypaName,jdbcType=VARCHAR},
+			</if>
+			<if test="sypaNameen != null">
+				#{sypaNameen,jdbcType=VARCHAR},
+			</if>
+			<if test="sypaValue != null">
+				#{sypaValue,jdbcType=VARCHAR},
+			</if>
+			<if test="sypaType != null">
+				#{sypaType,jdbcType=INTEGER},
+			</if>
+			<if test="sypaRemark != null">
+				#{sypaRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="sypaOrder != null">
+				#{sypaOrder,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.SystemParameter">
+		update systemparameter
+		<set>
+			<if test="sypaName != null">
+				sypa_name = #{sypaName,jdbcType=VARCHAR},
+			</if>
+			<if test="sypaNameen != null">
+				sypa_nameEn = #{sypaNameen,jdbcType=VARCHAR},
+			</if>
+			<if test="sypaValue != null">
+				sypa_value = #{sypaValue,jdbcType=VARCHAR},
+			</if>
+			<if test="sypaType != null">
+				sypa_type = #{sypaType,jdbcType=INTEGER},
+			</if>
+			<if test="sypaRemark != null">
+				sypa_remark = #{sypaRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="sypaOrder != null">
+				sypa_order = #{sypaOrder,jdbcType=INTEGER},
+			</if>
+		</set>
+		where sypa_id = #{sypaId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.SystemParameter">
+		update
+		systemparameter
+		set sypa_name = #{sypaName,jdbcType=VARCHAR},
+		sypa_nameEn = #{sypaNameen,jdbcType=VARCHAR},
+		sypa_value =
+		#{sypaValue,jdbcType=VARCHAR},
+		sypa_type =
+		#{sypaType,jdbcType=INTEGER},
+		sypa_remark =
+		#{sypaRemark,jdbcType=VARCHAR},
+		sypa_order =
+		#{sypaOrder,jdbcType=INTEGER}
+		where sypa_id =
+		#{sypaId,jdbcType=INTEGER}
+	</update>
+
+	<!-- by liujie -->
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from systemparameter
+	</select>
+
+</mapper>

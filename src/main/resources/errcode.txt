@@ -1,0 +1,83 @@
+﻿					错误代码对应解释
+
+respose.status：拦截掉的请求
+601 未登录
+602 数据库中没有该action（无效）
+603 角色尚未分配任何权限
+604 用户所拥有的角色中没有接口的权限
+
+JsonAndView.code:返回码对应信息
+0	成功
+1	缺少参数
+2	往别人网站增加文章
+3	添加失败
+4 	删除失败
+5	修改失败
+用户操作相关（UserController）
+101 用户名或密码格式错误
+102 用户不存在
+103 未验证
+104 密码错误
+105 已登路
+106 用户没有被赋予某一“角色”，可能是在user表里添加了，但没在userrole表中添加，这应该不会发生
+107 缺少注册参数
+108 获取注册码的邮箱和最后注册时不同
+109 注册码错误
+110 注册码失效
+111 邮箱为空或格式错误
+112 注册失败，用户名已被注册
+113 发送注册码失败
+114 注册失败，邮箱已被注册
+115 用户名格式错误
+116 密码不规范
+117 获取验证码失败
+118 验证码空
+119 注册码空
+120 验证码错误
+
+文件操作
+201 不支持的文件格式
+202 保存失败
+203 要管理文件的网站不存在
+204 非法操作：试图管理别人网站的文件
+205 不支持的图片格式
+
+video:3
+301 视频不存在
+news:4
+401 新闻不存在
+
+about:5
+501 简介不存在
+photo:6
+601 照片不存在
+download:7
+701 下载不存在
+
+navigation:8
+801 栏目不存在
+802	往不存在的网站添加栏目
+803	栏目不属于任何网站
+
+web:9
+901	网站不存在
+902 网站URL重复
+903 网站名重复
+904 妄图选择别人的网站check
+
+link:91
+9101:link不存在
+9102:妄图改webId
+9103：妄图给别人网站添加link
+9104： 妄图删除别人的link
+
+
+
+localhost:8080/icms2/about/show?aboutId=31
+localhost:8080/icms2/handler/user/login?userLoginname=admin&userPwd=admin
+
+localhost:8080/icms2/handler/user/regist?userLoginname=cdk&userPwd=cdk&regCode=790631
+
+http://localhost:8080/icms2/handler/user/regist?userLoginname=cdk&userPwd=cdk&userEmail=835001542@qq.com&regCode=157857
+
+http://localhost:8080/icms2/handler/user/regCode?mail=835001542@qq.com

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.LinkDao">
+	<resultMap id="BaseResultMap" type="com.swust.kelab.model.Link">
+		<id column="link_id" property="linkId" jdbcType="INTEGER" />
+		<result column="link_name" property="linkName" jdbcType="VARCHAR" />
+		<result column="link_url" property="linkUrl" jdbcType="VARCHAR" />
+		<result column="link_pic" property="linkPic" jdbcType="VARCHAR" />
+		<result column="link_web_id" property="linkWebId" jdbcType="INTEGER" />
+		<result column="link_order" property="linkOrder" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		link_id, link_name, link_url, link_pic, link_web_id,
+		link_order
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from link
+		where link_id = #{linkId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from link
+		where link_id = #{linkId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.swust.kelab.model.Link">
+		insert into link (link_id,
+		link_name, link_url,
+		link_pic, link_web_id, link_order
+		)
+		values
+		(#{linkId,jdbcType=INTEGER}, #{linkName,jdbcType=VARCHAR},
+		#{linkUrl,jdbcType=VARCHAR},
+		#{linkPic,jdbcType=VARCHAR},
+		#{linkWebId,jdbcType=INTEGER}, #{linkOrder,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.swust.kelab.model.Link">
+		insert into link
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="linkId != null">
+				link_id,
+			</if>
+			<if test="linkName != null">
+				link_name,
+			</if>
+			<if test="linkUrl != null">
+				link_url,
+			</if>
+			<if test="linkPic != null">
+				link_pic,
+			</if>
+			<if test="linkWebId != null">
+				link_web_id,
+			</if>
+			<if test="linkOrder != null">
+				link_order,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="linkId != null">
+				#{linkId,jdbcType=INTEGER},
+			</if>
+			<if test="linkName != null">
+				#{linkName,jdbcType=VARCHAR},
+			</if>
+			<if test="linkUrl != null">
+				#{linkUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="linkPic != null">
+				#{linkPic,jdbcType=VARCHAR},
+			</if>
+			<if test="linkWebId != null">
+				#{linkWebId,jdbcType=INTEGER},
+			</if>
+			<if test="linkOrder != null">
+				#{linkOrder,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.Link">
+		update link
+		<set>
+			<if test="linkName != null">
+				link_name = #{linkName,jdbcType=VARCHAR},
+			</if>
+			<if test="linkUrl != null">
+				link_url = #{linkUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="linkPic != null">
+				link_pic = #{linkPic,jdbcType=VARCHAR},
+			</if>
+			<if test="linkWebId != null">
+				link_web_id = #{linkWebId,jdbcType=INTEGER},
+			</if>
+			<if test="linkOrder != null">
+				link_order = #{linkOrder,jdbcType=INTEGER},
+			</if>
+		</set>
+		where link_id = #{linkId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.Link">
+		update link
+		set
+		link_name = #{linkName,jdbcType=VARCHAR},
+		link_url =
+		#{linkUrl,jdbcType=VARCHAR},
+		link_pic = #{linkPic,jdbcType=VARCHAR},
+		link_web_id = #{linkWebId,jdbcType=INTEGER},
+		link_order =
+		#{linkOrder,jdbcType=INTEGER}
+		where link_id =
+		#{linkId,jdbcType=INTEGER}
+	</update>
+
+	<!-- by twm -->
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from link
+		<where>
+			<if test="linkWebId != null">
+				and link_web_id = #{linkWebId}
+			</if>
+		</where>
+		order by
+		link_order
+		<if test="ordCol != null ">
+			,${ordCol}
+		</if>
+		<if test="linkId != null">
+			#{linkId,jdbcType=INTEGER},
+		</if>
+		<if test="linkName != null">
+			#{linkName,jdbcType=VARCHAR},
+		</if>
+		<if test="linkUrl!= null">
+			#{linkUrl,jdbcType=VARCHAR},
+		</if>
+		<if test="linkPic != null">
+			#{linkPic,jdbcType=VARCHAR},
+		</if>
+	</select>
+	<!-- by zh -->
+	<select id="findAll" resultType="com.swust.kelab.model.Link">
+		select link_id as linkId,
+		link_name as linkName,
+		link_url as linkUrl,
+		link_pic as linkPic,
+		link_web_id as linkWebId,
+		link_order as linkOrder
+		from link
+	</select>
+
+	<!-- by liujie -->
+	<select id="selectAllByWebId" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from link
+		where link_web_id = #{webId,jdbcType=INTEGER}
+		order by
+		link_order
+	</select>
+</mapper>

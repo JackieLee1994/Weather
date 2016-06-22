@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.LogDao" >
+  <resultMap id="BaseResultMap" type="com.swust.kelab.model.Log" >
+    <id column="log_id" property="logId" jdbcType="INTEGER" />
+    <result column="log_user_id" property="logUserId" jdbcType="INTEGER" />
+    <result column="log_opt" property="logOpt" jdbcType="VARCHAR" />
+    <result column="log_time" property="logTime" jdbcType="TIMESTAMP" />
+    <result column="log_ip" property="logIp" jdbcType="VARCHAR" />
+    <result column="log_client" property="logClient" jdbcType="VARCHAR" />
+    <result column="log_type" property="logType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    log_id, log_user_id, log_opt, log_time, log_ip, log_client, log_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.swust.kelab.model.Log" >
+    insert into log (log_id, log_user_id, log_opt, 
+      log_time, log_ip, log_client, 
+      log_type)
+    values (#{logId,jdbcType=INTEGER}, #{logUserId,jdbcType=INTEGER}, #{logOpt,jdbcType=VARCHAR}, 
+      #{logTime,jdbcType=TIMESTAMP}, #{logIp,jdbcType=VARCHAR}, #{logClient,jdbcType=VARCHAR}, 
+      #{logType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.swust.kelab.model.Log" >
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        log_id,
+      </if>
+      <if test="logUserId != null" >
+        log_user_id,
+      </if>
+      <if test="logOpt != null" >
+        log_opt,
+      </if>
+      <if test="logTime != null" >
+        log_time,
+      </if>
+      <if test="logIp != null" >
+        log_ip,
+      </if>
+      <if test="logClient != null" >
+        log_client,
+      </if>
+      <if test="logType != null" >
+        log_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="logUserId != null" >
+        #{logUserId,jdbcType=INTEGER},
+      </if>
+      <if test="logOpt != null" >
+        #{logOpt,jdbcType=VARCHAR},
+      </if>
+      <if test="logTime != null" >
+        #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logIp != null" >
+        #{logIp,jdbcType=VARCHAR},
+      </if>
+      <if test="logClient != null" >
+        #{logClient,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null" >
+        #{logType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.Log" >
+    update log
+    <set >
+      <if test="logUserId != null" >
+        log_user_id = #{logUserId,jdbcType=INTEGER},
+      </if>
+      <if test="logOpt != null" >
+        log_opt = #{logOpt,jdbcType=VARCHAR},
+      </if>
+      <if test="logTime != null" >
+        log_time = #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logIp != null" >
+        log_ip = #{logIp,jdbcType=VARCHAR},
+      </if>
+      <if test="logClient != null" >
+        log_client = #{logClient,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null" >
+        log_type = #{logType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.Log" >
+    update log
+    set log_user_id = #{logUserId,jdbcType=INTEGER},
+      log_opt = #{logOpt,jdbcType=VARCHAR},
+      log_time = #{logTime,jdbcType=TIMESTAMP},
+      log_ip = #{logIp,jdbcType=VARCHAR},
+      log_client = #{logClient,jdbcType=VARCHAR},
+      log_type = #{logType,jdbcType=INTEGER}
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+</mapper>

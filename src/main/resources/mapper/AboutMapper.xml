@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.AboutDao">
+	<resultMap id="BaseResultMap" type="com.swust.kelab.model.About">
+		<id column="about_id" property="aboutId" jdbcType="INTEGER" />
+		<result column="about_navi_id" property="aboutNaviId" jdbcType="INTEGER" />
+		<result column="about_title" property="aboutTitle" jdbcType="VARCHAR" />
+		<result column="about_tags" property="aboutTags" jdbcType="VARCHAR" />
+		<result column="about_hits" property="aboutHits" jdbcType="INTEGER" />
+		<result column="about_time" property="aboutTime" jdbcType="TIMESTAMP" />
+		<result column="about_lmtime" property="aboutLmtime" jdbcType="TIMESTAMP" />
+		<result column="about_istop" property="aboutIstop" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.swust.kelab.model.About"
+		extends="BaseResultMap">
+		<result column="about_content" property="aboutContent"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		about_id, about_navi_id, about_title, about_tags,
+		about_hits, about_time,
+		about_lmtime,about_istop
+	</sql>
+	<sql id="Blob_Column_List">
+		about_content
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from about
+		where about_id = #{aboutId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from about
+		where about_id = #{aboutId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.swust.kelab.model.About">
+		insert into about (about_id,
+		about_navi_id, about_title,
+		about_tags, about_hits, about_time,
+		about_lmtime, about_istop,about_content)
+		values
+		(#{aboutId,jdbcType=INTEGER},
+		#{aboutNaviId,jdbcType=INTEGER},
+		#{aboutTitle,jdbcType=VARCHAR},
+		#{aboutTags,jdbcType=VARCHAR},
+		#{aboutHits,jdbcType=INTEGER},
+		#{aboutTime,jdbcType=TIMESTAMP},
+		#{aboutLmtime,jdbcType=TIMESTAMP},
+		#{aboutIstop,jdbcType=INTEGER},
+		#{aboutContent,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.swust.kelab.model.About">
+		insert into about
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="aboutId != null">
+				about_id,
+			</if>
+			<if test="aboutNaviId != null">
+				about_navi_id,
+			</if>
+			<if test="aboutTitle != null">
+				about_title,
+			</if>
+			<if test="aboutTags != null">
+				about_tags,
+			</if>
+			<if test="aboutHits != null">
+				about_hits,
+			</if>
+			<if test="aboutTime != null">
+				about_time,
+			</if>
+			<if test="aboutLmtime != null">
+				about_lmtime,
+			</if>
+			<if test="aboutIstop != null">
+				about_istop,
+			</if>
+			<if test="aboutContent != null">
+				about_content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="aboutId != null">
+				#{aboutId,jdbcType=INTEGER},
+			</if>
+			<if test="aboutNaviId != null">
+				#{aboutNaviId,jdbcType=INTEGER},
+			</if>
+			<if test="aboutTitle != null">
+				#{aboutTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="aboutTags != null">
+				#{aboutTags,jdbcType=VARCHAR},
+			</if>
+			<if test="aboutHits != null">
+				#{aboutHits,jdbcType=INTEGER},
+			</if>
+			<if test="aboutTime != null">
+				#{aboutTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="aboutLmtime != null">
+				#{aboutLmtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="aboutIstop != null">
+				#{aboutIstop,jdbcType=INTEGER},
+			</if>
+			<if test="aboutContent != null">
+				#{aboutContent,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.About">
+		update about
+		<set>
+			<if test="aboutNaviId != null">
+				about_navi_id = #{aboutNaviId,jdbcType=INTEGER},
+			</if>
+			<if test="aboutTitle != null">
+				about_title = #{aboutTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="aboutTags != null">
+				about_tags = #{aboutTags,jdbcType=VARCHAR},
+			</if>
+			<if test="aboutHits != null">
+				about_hits = #{aboutHits,jdbcType=INTEGER},
+			</if>
+			<if test="aboutTime != null">
+				about_time = #{aboutTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="aboutLmtime != null">
+				about_lmtime = #{aboutLmtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="aboutIstop != null">
+				about_istop = #{aboutIstop,jdbcType=INTEGER},
+			</if>
+			<if test="aboutContent != null">
+				about_content = #{aboutContent,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where about_id = #{aboutId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.swust.kelab.model.About">
+		update
+		about
+		set about_navi_id = #{aboutNaviId,jdbcType=INTEGER},
+		about_title =
+		#{aboutTitle,jdbcType=VARCHAR},
+		about_tags =
+		#{aboutTags,jdbcType=VARCHAR},
+		about_hits =
+		#{aboutHits,jdbcType=INTEGER},
+		about_time =
+		#{aboutTime,jdbcType=TIMESTAMP},
+		about_lmtime =
+		#{aboutLmtime,jdbcType=TIMESTAMP},
+		about_istop =
+		#{aboutIstop,jdbcType=INTEGER},
+		about_content =
+		#{aboutContent,jdbcType=LONGVARCHAR}
+		where about_id =
+		#{aboutId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.About">
+		update about
+		set
+		about_navi_id = #{aboutNaviId,jdbcType=INTEGER},
+		about_title =
+		#{aboutTitle,jdbcType=VARCHAR},
+		about_tags =
+		#{aboutTags,jdbcType=VARCHAR},
+		about_hits =
+		#{aboutHits,jdbcType=INTEGER},
+		about_time =
+		#{aboutTime,jdbcType=TIMESTAMP},
+		about_lmtime =
+		#{aboutLmtime,jdbcType=TIMESTAMP},
+		about_istop =
+		#{aboutIstop,jdbcType=INTEGER}
+		where about_id =
+		#{aboutId,jdbcType=INTEGER}
+	</update>
+
+	<!-- by liujie -->
+	<!-- 主要目的提供列表，因此不查询内容（content列），节省资源 -->
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from about
+		<where>
+			<if test="naviId != null">
+				and about_navi_id = #{naviId}
+			</if>
+		</where>
+		order by
+		about_istop desc
+		<if test="ordCol != null ">
+			,${ordCol}
+			<if test="desc != null">
+				desc
+			</if>
+		</if>
+		<if test="size != null">
+			limit
+			<if test="begin != null">
+				#{begin,jdbcType=INTEGER},
+			</if>
+			#{size,jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<!-- by liujie -->
+	<!-- 查询栏目下所有文章数目 -->
+	<select id="selectCountByNaviId" resultType="java.lang.Integer"
+		parameterType="java.lang.Integer">
+		SELECT COUNT(*) FROM about WHERE
+		about_navi_id=#{naviId,jdbcType=INTEGER}
+	</select>
+</mapper>

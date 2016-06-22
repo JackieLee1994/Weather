@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.NewsDao">
+	<resultMap id="BaseResultMap" type="com.swust.kelab.model.News">
+		<id column="news_id" property="newsId" jdbcType="INTEGER" />
+		<result column="news_navi_id" property="newsNaviId" jdbcType="INTEGER" />
+		<result column="news_title" property="newsTitle" jdbcType="VARCHAR" />
+		<result column="news_publish" property="newsPublish" jdbcType="VARCHAR" />
+		<result column="news_tags" property="newsTags" jdbcType="VARCHAR" />
+		<result column="news_hits" property="newsHits" jdbcType="INTEGER" />
+		<result column="news_istop" property="newsIstop" jdbcType="INTEGER" />
+		<result column="news_time" property="newsTime" jdbcType="TIMESTAMP" />
+		<result column="news_pic" property="newsPic" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.swust.kelab.model.News"
+		extends="BaseResultMap">
+		<result column="news_content" property="newsContent" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		news_id, news_navi_id, news_title,
+		news_publish, news_tags,
+		news_hits, news_istop,
+		news_time, news_pic
+	</sql>
+	<sql id="Blob_Column_List">
+		news_content
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from news
+		where news_id = #{newsId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from news
+		where news_id = #{newsId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.swust.kelab.model.News">
+		insert into news (news_id,
+		news_navi_id,news_title,
+		news_publish, news_tags,
+		news_hits,
+		news_istop,
+		news_time, news_pic,
+		news_content)
+		values
+		(#{newsId,jdbcType=INTEGER},
+		#{newsNaviId,jdbcType=INTEGER},
+		#{newsTitle,jdbcType=VARCHAR},
+		#{newsPublish,jdbcType=VARCHAR},
+		#{newsTags,jdbcType=VARCHAR},
+		#{newsHits,jdbcType=INTEGER},
+		#{newsIstop,jdbcType=INTEGER},
+		#{newsTime,jdbcType=TIMESTAMP},
+		#{newsPic,jdbcType=VARCHAR},
+		#{newsContent,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.swust.kelab.model.News">
+		insert into news
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="newsId != null">
+				news_id,
+			</if>
+			<if test="newsNaviId != null">
+				news_navi_id,
+			</if>
+			<if test="newsTitle != null">
+				news_title,
+			</if>
+			<if test="newsPublish != null">
+				news_publish,
+			</if>
+			<if test="newsTags != null">
+				news_tags,
+			</if>
+			<if test="newsHits != null">
+				news_hits,
+			</if>
+			<if test="newsIstop != null">
+				news_istop,
+			</if>
+			<if test="newsTime != null">
+				news_time,
+			</if>
+			<if test="newsPic != null">
+				news_pic,
+			</if>
+			<if test="newsContent != null">
+				news_content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="newsId != null">
+				#{newsId,jdbcType=INTEGER},
+			</if>
+			<if test="newsNaviId != null">
+				#{newsNaviId,jdbcType=INTEGER},
+			</if>
+			<if test="newsTitle != null">
+				#{newsTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="newsPublish != null">
+				#{newsPublish,jdbcType=VARCHAR},
+			</if>
+			<if test="newsTags != null">
+				#{newsTags,jdbcType=VARCHAR},
+			</if>
+			<if test="newsHits != null">
+				#{newsHits,jdbcType=INTEGER},
+			</if>
+			<if test="newsIstop != null">
+				#{newsIstop,jdbcType=INTEGER},
+			</if>
+			<if test="newsTime != null">
+				#{newsTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="newsPic != null">
+				#{newsPic,jdbcType=VARCHAR},
+			</if>
+			<if test="newsContent != null">
+				#{newsContent,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.News">
+		update news
+		<set>
+			<if test="newsNaviId != null">
+				news_navi_id = #{newsNaviId,jdbcType=INTEGER},
+			</if>
+			<if test="newsTitle != null">
+				news_title = #{newsTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="newsPublish != null">
+				news_publish = #{newsPublish,jdbcType=VARCHAR},
+			</if>
+			<if test="newsTags != null">
+				news_tags = #{newsTags,jdbcType=VARCHAR},
+			</if>
+			<if test="newsHits != null">
+				news_hits = #{newsHits,jdbcType=INTEGER},
+			</if>
+			<if test="newsIstop != null">
+				news_istop = #{newsIstop,jdbcType=INTEGER},
+			</if>
+			<if test="newsTime != null">
+				news_time = #{newsTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="newsPic != null">
+				news_pic = #{newsPic,jdbcType=VARCHAR},
+			</if>
+			<if test="newsContent != null">
+				news_content = #{newsContent,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where news_id = #{newsId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.swust.kelab.model.News">
+		update
+		news
+		set news_navi_id = #{newsNaviId,jdbcType=INTEGER},
+		news_title =
+		#{newsTitle,jdbcType=VARCHAR},
+		news_publish =
+		#{newsPublish,jdbcType=VARCHAR},
+		news_tags =
+		#{newsTags,jdbcType=VARCHAR},
+		news_hits = #{newsHits,jdbcType=INTEGER},
+		news_istop = #{newsIstop,jdbcType=INTEGER},
+		news_time =
+		#{newsTime,jdbcType=TIMESTAMP},
+		news_pic = #{newsPic,jdbcType=VARCHAR},
+		news_content = #{newsContent,jdbcType=LONGVARCHAR}
+		where news_id =
+		#{newsId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.News">
+		update news
+		set
+		news_navi_id = #{newsNaviId,jdbcType=INTEGER},
+		news_title =
+		#{newsTitle,jdbcType=VARCHAR},
+		news_publish =
+		#{newsPublish,jdbcType=VARCHAR},
+		news_tags =
+		#{newsTags,jdbcType=VARCHAR},
+		news_hits = #{newsHits,jdbcType=INTEGER},
+		news_istop = #{newsIstop,jdbcType=INTEGER},
+		news_time =
+		#{newsTime,jdbcType=TIMESTAMP},
+		news_pic = #{newsPic,jdbcType=VARCHAR}
+		where news_id = #{newsId,jdbcType=INTEGER}
+	</update>
+
+	<!-- by liujie -->
+	<!-- 主要目的提供列表，因此不查询内容（content列），节省资源 -->
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from news
+		<where>
+			<if test="naviId != null">
+				and news_navi_id = #{naviId}
+			</if>
+		</where>
+		order by
+		news_istop desc
+		<if test="ordCol != null ">
+			,${ordCol}
+			<if test="desc != null">
+				desc
+			</if>
+		</if>
+		<if test="size != null">
+			limit
+			<if test="begin != null">
+				#{begin,jdbcType=INTEGER},
+			</if>
+			#{size,jdbcType=INTEGER}
+		</if>
+	</select>
+	<!-- by liujie -->
+	<!-- 查询栏目下所有文章数目 -->
+	<select id="selectCountByNaviId" resultType="java.lang.Integer"
+		parameterType="java.lang.Integer">
+		SELECT COUNT(*) FROM news WHERE
+		news_navi_id=#{naviId,jdbcType=INTEGER}
+	</select>
+</mapper>

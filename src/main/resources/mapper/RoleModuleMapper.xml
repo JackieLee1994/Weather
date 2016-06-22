@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.RoleModuleDao">
+	<resultMap id="BaseResultMap" type="com.swust.kelab.model.RoleModule">
+		<id column="romo_id" property="romoId" jdbcType="INTEGER" />
+		<result column="romo_role_id" property="romoRoleId" jdbcType="INTEGER" />
+		<result column="romo_mo_id" property="romoMoId" jdbcType="INTEGER" />
+		<result column="romo_actions" property="romoActions" jdbcType="VARCHAR" />
+		<result column="romo_time" property="romoTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		romo_id, romo_role_id, romo_mo_id, romo_actions, romo_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from rolemodule
+		where romo_id = #{romoId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		rolemodule
+		where romo_id = #{romoId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.swust.kelab.model.RoleModule">
+		insert into rolemodule
+		(romo_id, romo_role_id, romo_mo_id,
+		romo_actions, romo_time)
+		values
+		(#{romoId,jdbcType=INTEGER}, #{romoRoleId,jdbcType=INTEGER},
+		#{romoMoId,jdbcType=INTEGER},
+		#{romoActions,jdbcType=VARCHAR},
+		#{romoTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.swust.kelab.model.RoleModule">
+		insert into rolemodule
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="romoId != null">
+				romo_id,
+			</if>
+			<if test="romoRoleId != null">
+				romo_role_id,
+			</if>
+			<if test="romoMoId != null">
+				romo_mo_id,
+			</if>
+			<if test="romoActions != null">
+				romo_actions,
+			</if>
+			<if test="romoTime != null">
+				romo_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="romoId != null">
+				#{romoId,jdbcType=INTEGER},
+			</if>
+			<if test="romoRoleId != null">
+				#{romoRoleId,jdbcType=INTEGER},
+			</if>
+			<if test="romoMoId != null">
+				#{romoMoId,jdbcType=INTEGER},
+			</if>
+			<if test="romoActions != null">
+				#{romoActions,jdbcType=VARCHAR},
+			</if>
+			<if test="romoTime != null">
+				#{romoTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.RoleModule">
+		update rolemodule
+		<set>
+			<if test="romoRoleId != null">
+				romo_role_id = #{romoRoleId,jdbcType=INTEGER},
+			</if>
+			<if test="romoMoId != null">
+				romo_mo_id = #{romoMoId,jdbcType=INTEGER},
+			</if>
+			<if test="romoActions != null">
+				romo_actions = #{romoActions,jdbcType=VARCHAR},
+			</if>
+			<if test="romoTime != null">
+				romo_time = #{romoTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where romo_id = #{romoId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.RoleModule">
+		update rolemodule
+		set romo_role_id = #{romoRoleId,jdbcType=INTEGER},
+		romo_mo_id =
+		#{romoMoId,jdbcType=INTEGER},
+		romo_actions =
+		#{romoActions,jdbcType=VARCHAR},
+		romo_time =
+		#{romoTime,jdbcType=TIMESTAMP}
+		where romo_id =
+		#{romoId,jdbcType=INTEGER}
+	</update>
+
+	<!-- by liujie,String roleIds="(1,2,3,4)"; -->
+	<select id="selectByRoleIds" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from rolemodule
+		where romo_role_id in ( #{roleIds} )
+	</select>
+</mapper>

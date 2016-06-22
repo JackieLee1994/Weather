@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.DepartmentDao" >
+  <resultMap id="BaseResultMap" type="com.swust.kelab.model.Department" >
+    <id column="depa_id" property="depaId" jdbcType="INTEGER" />
+    <result column="depa_name" property="depaName" jdbcType="VARCHAR" />
+    <result column="depa_abbreviation" property="depaAbbreviation" jdbcType="VARCHAR" />
+    <result column="depa_code" property="depaCode" jdbcType="VARCHAR" />
+    <result column="depa_parent_id" property="depaParentId" jdbcType="INTEGER" />
+    <result column="depa_type" property="depaType" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    depa_id, depa_name, depa_abbreviation, depa_code, depa_parent_id, depa_type, order_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from department
+    where depa_id = #{depaId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from department
+    where depa_id = #{depaId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.swust.kelab.model.Department" >
+    insert into department (depa_id, depa_name, depa_abbreviation, 
+      depa_code, depa_parent_id, depa_type, 
+      order_id)
+    values (#{depaId,jdbcType=INTEGER}, #{depaName,jdbcType=VARCHAR}, #{depaAbbreviation,jdbcType=VARCHAR}, 
+      #{depaCode,jdbcType=VARCHAR}, #{depaParentId,jdbcType=INTEGER}, #{depaType,jdbcType=INTEGER}, 
+      #{orderId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.swust.kelab.model.Department" >
+    insert into department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="depaId != null" >
+        depa_id,
+      </if>
+      <if test="depaName != null" >
+        depa_name,
+      </if>
+      <if test="depaAbbreviation != null" >
+        depa_abbreviation,
+      </if>
+      <if test="depaCode != null" >
+        depa_code,
+      </if>
+      <if test="depaParentId != null" >
+        depa_parent_id,
+      </if>
+      <if test="depaType != null" >
+        depa_type,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="depaId != null" >
+        #{depaId,jdbcType=INTEGER},
+      </if>
+      <if test="depaName != null" >
+        #{depaName,jdbcType=VARCHAR},
+      </if>
+      <if test="depaAbbreviation != null" >
+        #{depaAbbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="depaCode != null" >
+        #{depaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="depaParentId != null" >
+        #{depaParentId,jdbcType=INTEGER},
+      </if>
+      <if test="depaType != null" >
+        #{depaType,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.Department" >
+    update department
+    <set >
+      <if test="depaName != null" >
+        depa_name = #{depaName,jdbcType=VARCHAR},
+      </if>
+      <if test="depaAbbreviation != null" >
+        depa_abbreviation = #{depaAbbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="depaCode != null" >
+        depa_code = #{depaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="depaParentId != null" >
+        depa_parent_id = #{depaParentId,jdbcType=INTEGER},
+      </if>
+      <if test="depaType != null" >
+        depa_type = #{depaType,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where depa_id = #{depaId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.Department" >
+    update department
+    set depa_name = #{depaName,jdbcType=VARCHAR},
+      depa_abbreviation = #{depaAbbreviation,jdbcType=VARCHAR},
+      depa_code = #{depaCode,jdbcType=VARCHAR},
+      depa_parent_id = #{depaParentId,jdbcType=INTEGER},
+      depa_type = #{depaType,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER}
+    where depa_id = #{depaId,jdbcType=INTEGER}
+  </update>
+</mapper>

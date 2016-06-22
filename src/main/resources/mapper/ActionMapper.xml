@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.ActionDao">
+	<resultMap id="BaseResultMap" type="com.swust.kelab.model.Action">
+		<id column="acti_id" property="actiId" jdbcType="INTEGER" />
+		<result column="acti_name" property="actiName" jdbcType="VARCHAR" />
+		<result column="acti_describe" property="actiDescribe"
+			jdbcType="VARCHAR" />
+		<result column="acti_url" property="actiUrl" jdbcType="VARCHAR" />
+		<result column="acti_type" property="actiType" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		acti_id, acti_name, acti_describe, acti_url, acti_type
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from action
+		where acti_id = #{actiId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from action
+		where acti_id = #{actiId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.swust.kelab.model.Action">
+		insert into action (acti_id, acti_name, acti_describe,
+		acti_url, acti_type)
+		values (#{actiId,jdbcType=INTEGER}, #{actiName,jdbcType=VARCHAR},
+		#{actiDescribe,jdbcType=VARCHAR},
+		#{actiUrl,jdbcType=VARCHAR}, #{actiType,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.swust.kelab.model.Action">
+		insert into action
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="actiId != null">
+				acti_id,
+			</if>
+			<if test="actiName != null">
+				acti_name,
+			</if>
+			<if test="actiDescribe != null">
+				acti_describe,
+			</if>
+			<if test="actiUrl != null">
+				acti_url,
+			</if>
+			<if test="actiType != null">
+				acti_type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="actiId != null">
+				#{actiId,jdbcType=INTEGER},
+			</if>
+			<if test="actiName != null">
+				#{actiName,jdbcType=VARCHAR},
+			</if>
+			<if test="actiDescribe != null">
+				#{actiDescribe,jdbcType=VARCHAR},
+			</if>
+			<if test="actiUrl != null">
+				#{actiUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="actiType != null">
+				#{actiType,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.Action">
+		update action
+		<set>
+			<if test="actiName != null">
+				acti_name = #{actiName,jdbcType=VARCHAR},
+			</if>
+			<if test="actiDescribe != null">
+				acti_describe = #{actiDescribe,jdbcType=VARCHAR},
+			</if>
+			<if test="actiUrl != null">
+				acti_url = #{actiUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="actiType != null">
+				acti_type = #{actiType,jdbcType=INTEGER},
+			</if>
+		</set>
+		where acti_id = #{actiId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.Action">
+		update action
+		set acti_name = #{actiName,jdbcType=VARCHAR},
+		acti_describe = #{actiDescribe,jdbcType=VARCHAR},
+		acti_url = #{actiUrl,jdbcType=VARCHAR},
+		acti_type = #{actiType,jdbcType=INTEGER}
+		where acti_id = #{actiId,jdbcType=INTEGER}
+	</update>
+
+	<!-- by liujie -->
+	<select id="selectByUrl" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from action
+		where acti_url = #{url}
+	</select>
+</mapper>

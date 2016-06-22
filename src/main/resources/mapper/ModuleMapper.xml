@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.kelab.dao.ModuleDao" >
+  <resultMap id="BaseResultMap" type="com.swust.kelab.model.Module" >
+    <id column="mo_id" property="moId" jdbcType="INTEGER" />
+    <result column="mo_parentid" property="moParentid" jdbcType="INTEGER" />
+    <result column="mo_name" property="moName" jdbcType="VARCHAR" />
+    <result column="mo_url" property="moUrl" jdbcType="VARCHAR" />
+    <result column="mo_describe" property="moDescribe" jdbcType="VARCHAR" />
+    <result column="mo_ordinal" property="moOrdinal" jdbcType="INTEGER" />
+    <result column="mo_icon" property="moIcon" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mo_id, mo_parentid, mo_name, mo_url, mo_describe, mo_ordinal, mo_icon
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from module
+    where mo_id = #{moId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from module
+    where mo_id = #{moId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.swust.kelab.model.Module" >
+    insert into module (mo_id, mo_parentid, mo_name, 
+      mo_url, mo_describe, mo_ordinal, 
+      mo_icon)
+    values (#{moId,jdbcType=INTEGER}, #{moParentid,jdbcType=INTEGER}, #{moName,jdbcType=VARCHAR}, 
+      #{moUrl,jdbcType=VARCHAR}, #{moDescribe,jdbcType=VARCHAR}, #{moOrdinal,jdbcType=INTEGER}, 
+      #{moIcon,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.swust.kelab.model.Module" >
+    insert into module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="moId != null" >
+        mo_id,
+      </if>
+      <if test="moParentid != null" >
+        mo_parentid,
+      </if>
+      <if test="moName != null" >
+        mo_name,
+      </if>
+      <if test="moUrl != null" >
+        mo_url,
+      </if>
+      <if test="moDescribe != null" >
+        mo_describe,
+      </if>
+      <if test="moOrdinal != null" >
+        mo_ordinal,
+      </if>
+      <if test="moIcon != null" >
+        mo_icon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="moId != null" >
+        #{moId,jdbcType=INTEGER},
+      </if>
+      <if test="moParentid != null" >
+        #{moParentid,jdbcType=INTEGER},
+      </if>
+      <if test="moName != null" >
+        #{moName,jdbcType=VARCHAR},
+      </if>
+      <if test="moUrl != null" >
+        #{moUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="moDescribe != null" >
+        #{moDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="moOrdinal != null" >
+        #{moOrdinal,jdbcType=INTEGER},
+      </if>
+      <if test="moIcon != null" >
+        #{moIcon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.swust.kelab.model.Module" >
+    update module
+    <set >
+      <if test="moParentid != null" >
+        mo_parentid = #{moParentid,jdbcType=INTEGER},
+      </if>
+      <if test="moName != null" >
+        mo_name = #{moName,jdbcType=VARCHAR},
+      </if>
+      <if test="moUrl != null" >
+        mo_url = #{moUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="moDescribe != null" >
+        mo_describe = #{moDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="moOrdinal != null" >
+        mo_ordinal = #{moOrdinal,jdbcType=INTEGER},
+      </if>
+      <if test="moIcon != null" >
+        mo_icon = #{moIcon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mo_id = #{moId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.swust.kelab.model.Module" >
+    update module
+    set mo_parentid = #{moParentid,jdbcType=INTEGER},
+      mo_name = #{moName,jdbcType=VARCHAR},
+      mo_url = #{moUrl,jdbcType=VARCHAR},
+      mo_describe = #{moDescribe,jdbcType=VARCHAR},
+      mo_ordinal = #{moOrdinal,jdbcType=INTEGER},
+      mo_icon = #{moIcon,jdbcType=VARCHAR}
+    where mo_id = #{moId,jdbcType=INTEGER}
+  </update>
+</mapper>
